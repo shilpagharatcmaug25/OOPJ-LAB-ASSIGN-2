@@ -1,80 +1,34 @@
-/*Problem 3: Library Book Tracker 
-Scenario: A library in Delhi wants to track how many books are issued in total and details of each book. 
-Requirements: 
-1. Create a Book class with instance variables: title (String), author (String), issued (boolean). 
-2. Create static variable totalIssuedBooks to keep track of the total number of books issued. 
-3. Create a constructor to initialize the book details. 
-4. Create getters and setters for all instance variables. 
-5. Create a static method showTotalIssued() to print total issued books. 
-6. Write a main class to create 3 books, issue some of them (issued = true), and show total issued 
-books. 
-Input Example: 
-Book1: "Harry Potter", Author: "J.K. Rowling", Issued: true 
-Book2: "Five Point Someone", Author: "Chetan Bhagat", Issued: false 
-Book3: "Rich Dad Poor Dad", Author: "Robert Kiyosaki", Issued: true */
+class Book{
 
-public class Book {
+private int copiesAvailable;
 
-private String title;
-private String author;
-private boolean issued;
-
-private static int totalIssuedBooks;
-
-
-public Book(String title,String author,boolean issued){
-	this.title=title;
-	this.author=author;
-	this.issued=issued;
-
-
-if(issued){
-	totalIssuedBooks++;
+public Book(){
+	copiesAvailable=0;
+	
 }
-}
-
-public String getTitle(){
-	return title;
-}
-
-public String getAuthor(){
-	return author;
-}
-
-public boolean isIssued(){
-	return issued;
-}
-
-public void setTitle(String title){
-	this.title=title;
-}
-public void setAuthor(String author){
-	this.author=author;
-}
-
-public void setissued (boolean issued){
-	if(this.issued!=issued){
-		if(issued)
-			totalIssuedBooks++;
+public void addcopies(int n){
+	if(n>0){
+		copiesAvailable+=n;
 	}
-	else{
-		totalIssuedBooks--;
+}
+public void removeCopies(int n) {
+        if (n > 0 && copiesAvailable >= n) {
+            copiesAvailable -= n;
+        } else {
+            System.out.println("Not enough copies to remove.");
+        }
+    }
+	public int getCopiesAvailable(){
+		return copiesAvailable;
 	}
 	
-this.issued=issued;
+	public static void main(String args[]){
+		Book b1=new Book();
+		
+		b1.addcopies(3);
+		b1.removeCopies(1);
+		
+		System.out.println("Copies available :" + b1.getCopiesAvailable());
+	}
 }
 
- public static void showTotalIssued() {
-        System.out.println("Total books issued: " + totalIssuedBooks);
-    }
-
- public static void main(String[] args) {
-        // Create book objects
-        Book book1 = new Book("Harry Potter", "J.K. Rowling", false);
-        Book book2 = new Book("Five Point Someone", "Chetan Bhagat", false);
-        Book book3 = new Book("Rich Dad Poor Dad", "Robert Kiyosaki", false);
-
-        // Show total issued books
-        Book.showTotalIssued();
-    }
-}
